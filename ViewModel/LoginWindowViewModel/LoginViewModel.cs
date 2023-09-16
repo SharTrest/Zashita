@@ -46,7 +46,7 @@ namespace Diplom.Client.ViewModel.LoginWindowViewModel
 
         public LoginViewModel(UserData user, LoginWindow wind, ZashitaDB dB)
         {
-            register = new RegisterUserControl();
+            register = new RegisterUserControl(user, dB);
             login = new LoginUserControl(user, wind, dB);
             IsViewVisible = user.Authed;
             LogCommand = new RelayCommand(Log);

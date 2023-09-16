@@ -2,11 +2,14 @@
 using Diplom.Utilities;
 using System;
 using System.Collections.Generic;
+using System.ComponentModel;
 using System.Runtime.InteropServices;
 using System.Security;
 using System.Text;
 using System.Threading.Tasks;
+using System.Windows;
 using System.Windows.Input;
+using Zashita.DAL.Context;
 
 namespace Diplom.Client.ViewModel.MainWindowViewModel
 {
@@ -16,6 +19,8 @@ namespace Diplom.Client.ViewModel.MainWindowViewModel
         private SecureString _password;
         private SecureString _repeatPassword;
         private string _errorMessage;
+        private static ZashitaDB _db;
+        private static UserData _data;
 
         public string Username
         {
@@ -68,18 +73,15 @@ namespace Diplom.Client.ViewModel.MainWindowViewModel
         public ICommand RegisterCommand { get; }
 
 
-        public RegViewModel()
+        public RegViewModel(UserData user, ZashitaDB db)
         {
+            _data = user;
+            _db = db;
             RegisterCommand = new RelayCommand(ExecuteRegCommand, CanExecuteRegCommand);
         }
 
         private bool CanExecuteRegCommand(object arg)
         {
-            if (string.IsNullOrWhiteSpace(Username) || Username.Length < 3)
-            {
-                ErrorMessage = "Длина логина должна превышать 3 символа";
-                return false;
-            }
             if (Password == null || Password.Length < 5)
             {
                 ErrorMessage = "Длина пароля должна превышать 5 символов";
@@ -101,8 +103,7 @@ namespace Diplom.Client.ViewModel.MainWindowViewModel
                     return false;
                 }
             }
-            if (ErrorMessage != "Данный логин занят")
-                ErrorMessage = null;
+            _data.Password = ConvertToUnsecureString(Password);
             return true;
         }
 
@@ -123,31 +124,19 @@ namespace Diplom.Client.ViewModel.MainWindowViewModel
         private async void ExecuteRegCommand(object obj)
         {
             var isRegistered = await RegisterNewUser(Username, ConvertToUnsecureString(Password));
-            if (isRegistered == "True")
-                ErrorMessage = null;
-            else
-                ErrorMessage = "Данный логин занят";
+            if (isRegistered) 
+            {
+                MessageBox.Show("УСПЕХ!");
+            }
         }
 
 
 
-        public static async Task<string> RegisterNewUser(string username, string password)
+        public static async Task<bool> RegisterNewUser(string username, string password)
         {
 
-            var response = new List<byte>();
-            int bytesRead = 10;
 
-            var messages = new string[] { $"Register,{username},{password},\n" };
-
-            // получаем NetworkStream для взаимодействия с сервером
-            foreach (var message in messages)
-            {
-                // считыванием строку в массив байт
-                byte[] data = Encoding.UTF8.GetBytes(message);
-                // отправляем данные
-            }
-            var isRegistered = Encoding.UTF8.GetString(response.ToArray());
-            response.Clear();
+            var isRegistered = Methods.ChangePassword(_db, _data);
 
             return isRegistered;
 

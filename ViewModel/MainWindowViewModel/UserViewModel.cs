@@ -4,6 +4,7 @@ using Diplom.Utilities;
 using MathCore.Values;
 using System;
 using System.Windows.Input;
+using Zashita.DAL.Context;
 
 namespace Diplom.Client.ViewModel.MainWindowViewModel
 {
@@ -36,7 +37,7 @@ namespace Diplom.Client.ViewModel.MainWindowViewModel
 
         private void Change(object obj) => CurrentView = RemakePassView;
 
-        public UserViewModel(UserData user)
+        public UserViewModel(UserData user, ZashitaDB db)
         {
             RemakePassCommand = new RelayCommand(Change);
             _remakePassView = new RemakePassUserControl(user);

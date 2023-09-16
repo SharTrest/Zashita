@@ -7,6 +7,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using System.Windows.Input;
+using Zashita.DAL.Context;
 
 namespace Diplom.Client.ViewModel.MainWindowViewModel
 {
@@ -15,28 +16,61 @@ namespace Diplom.Client.ViewModel.MainWindowViewModel
         private readonly string _username;
         private object _currentView;
         private UserData _user;
-
+        private RemakePassUserControl _rpv;
+        private RemakePassUserControl _showListView;
+        private RemakePassUserControl _banUserByNameView;
         public object CurrentView
         {
-            get { return _currentView; }
-            set { _currentView = value; OnPropertyChanged(); }
+            get
+            {
+                return _currentView;
+            }
+            set
+            {
+                _currentView = value;
+                OnPropertyChanged();
+            }
         }
         public string UserName => _username;
 
-        public ICommand RemakePass { get; }
-        public ICommand ShowUsersListCommand { get; }
+        public ICommand RemakePassCommand { get; }
+        public ICommand ShowUsersListCommand { get; }   
         public ICommand BanUserByNameCommand { get; }
 
-        private void Change(object obj) => CurrentView = new RemakePassUserControl(_user);
-        //private void ShowList(object obj) => CurrentView = ShowListView;
-        //private void Ban(object obj) => CurrentView = BanUserByNameView;
+        private void Change(object obj) => CurrentView = _rpv;
+        private void ShowList(object obj) => CurrentView = _showListView;
+        private void Ban(object obj) => CurrentView = _banUserByNameView;
 
 
-        public AdminViewModel(UserData user)
+        public AdminViewModel(UserData user, ZashitaDB db)
         {
+            if (user.Password == "") 
+            {
+                CurrentView = new RegisterUserControl(user, db);
+            }
+            _rpv = new RemakePassUserControl(user);
+            RemakePassCommand = new RelayCommand(Change, CanChange);
+            ShowUsersListCommand = new RelayCommand(ShowList, CanShowList);
+            BanUserByNameCommand = new RelayCommand(Ban, CanBan);
+
             _username = user.UserName;
             _user = user;
-            CurrentView = new RelayCommand(Change);
+
+        }
+
+        private bool CanBan(object arg)
+        {
+            return _user.Password != "";
+        }
+
+        private bool CanShowList(object arg)
+        {
+            return _user.Password != "";
+        }
+
+        private bool CanChange(object arg)
+        {
+            return _user.Password != "";
         }
     }
 }

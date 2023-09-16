@@ -13,6 +13,7 @@ using System.Windows.Input;
 using System.Windows.Media;
 using System.Windows.Media.Imaging;
 using System.Windows.Shapes;
+using Zashita.DAL.Context;
 
 namespace Diplom.Client.View.Windows
 {
@@ -21,9 +22,9 @@ namespace Diplom.Client.View.Windows
     /// </summary>
     public partial class UserMainWindow : Window
     {
-        public UserMainWindow(UserData user)
+        public UserMainWindow(UserData user, ZashitaDB db)
         {
-            this.DataContext = new UserViewModel(user);
+            this.DataContext = new UserViewModel(user, db);
             InitializeComponent();
         }
     }

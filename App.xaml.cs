@@ -26,13 +26,13 @@ namespace Diplom
             {
                 if (user.Authed == true && loginView.IsLoaded && user.Status == "U")
                 {
-                    var mainView = new UserMainWindow(user);
+                    var mainView = new UserMainWindow(user, db);
                     mainView.Show();
                     loginView.Close();
                 }
                 if (user.Authed == true && loginView.IsLoaded && user.Status == "A")
                 {
-                    var mainView = new AdminMainWindow(user);
+                    var mainView = new AdminMainWindow(user, db);
                     mainView.Show();
                     loginView.Close();
                 }
