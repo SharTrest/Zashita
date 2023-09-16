@@ -1,0 +1,87 @@
+﻿<Window x:Class="Diplom.Client.View.Windows.AdminMainWindow"
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+        xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+        xmlns:local="clr-namespace:Diplom.Client.View.Windows"
+        mc:Ignorable="d"
+        Title="AdminMainWindow" 
+         d:DesignHeight="450" 
+         d:DesignWidth="800"
+         Background="#212529">
+    <Grid>
+        <Grid.ColumnDefinitions>
+            <ColumnDefinition Width="250"/>
+            <ColumnDefinition Width="*"/>
+        </Grid.ColumnDefinitions>
+        <Grid.RowDefinitions>
+            <RowDefinition Height="30"/>
+            <RowDefinition Height="*"/>
+        </Grid.RowDefinitions>
+
+        <StackPanel Grid.Row="1">
+            <Border Grid.Column="0"
+                Grid.Row="1"
+                Margin="10"
+                Height="150"
+                Width="150"
+                VerticalAlignment="Top"
+                HorizontalAlignment="Center">
+                <Border.Background>
+                    <ImageBrush ImageSource="../../Resources/Images/user-icon.png"/>
+                </Border.Background>
+            </Border>
+            <TextBlock Grid.Column="0"
+                   Grid.Row="1"
+                   Margin="10"
+                   Height="20"
+                   Width="150"
+                   HorizontalAlignment="Center"
+                   Foreground="Gray"
+                   FontSize="14"
+                   TextAlignment="Center"
+                   Text="{Binding UserName}"/>
+            <Button 
+                Height="30"
+                Width="200"
+                Background="Transparent"
+                Content="Изменение пароля"
+                Foreground="Gray"
+                FontSize="16"
+                VerticalAlignment="Top"
+                HorizontalAlignment="Left"
+                Margin="25,25,0,0"
+                Command="{Binding RemakePassCommand}"/>
+            <Button 
+                Height="30"
+                Width="200"
+                Background="Transparent"
+                Content="Список пользователей"
+                Foreground="Gray"
+                FontSize="16"
+                VerticalAlignment="Top"
+                HorizontalAlignment="Left"
+                Margin="25,10,0,0"
+                Command="{Binding ShowUsersListCommand}"/>
+            <Button 
+                Height="30"
+                Width="200"
+                Background="Transparent"
+                Content="Забанить по имени"
+                Foreground="Gray"
+                FontSize="16"
+                VerticalAlignment="Top"
+                HorizontalAlignment="Left"
+                Margin="25,10,0,0"
+                Command="{Binding BanUserByNameCommand}"/>
+        </StackPanel>
+        <StackPanel Grid.Column="1"
+                    Grid.Row="1"
+                    HorizontalAlignment="Left"
+                    Width="550"
+                    >
+            <ContentControl x:Name="ChangePass"
+                            Content="{Binding CurrentView}"/>
+        </StackPanel>
+    </Grid>
+</Window>
