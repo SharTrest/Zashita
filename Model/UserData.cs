@@ -12,6 +12,7 @@ namespace Diplom.Client.Model
         private string _password;
         private bool _authed = false;
         private string _status;
+        private bool _pass;
 
         public string UserName 
             {
@@ -33,6 +34,10 @@ namespace Diplom.Client.Model
             get => _status;
             set { _status = value; }
         }
-
+        public bool Pass
+        {
+            set { _pass = value; }
+            get { return _pass; }
+        }
     }
 }

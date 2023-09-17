@@ -28,7 +28,7 @@
                 VerticalAlignment="Top"
                 HorizontalAlignment="Center">
             <Border.Background>
-                <ImageBrush ImageSource="../../Resources/Images/user-icon.png"/>
+                <ImageBrush ImageSource="../../Resources/Images/user.jpg"/>
             </Border.Background>
         </Border>
         <TextBlock Grid.Column="0"

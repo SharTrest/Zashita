@@ -1,8 +1,6 @@
 ﻿using Diplom.Client.Model;
 using Diplom.Client.View.LoginWindowUserControls;
 using Diplom.Utilities;
-using MathCore.Values;
-using System;
 using System.Windows.Input;
 using Zashita.DAL.Context;
 
@@ -40,7 +38,7 @@ namespace Diplom.Client.ViewModel.MainWindowViewModel
         public UserViewModel(UserData user, ZashitaDB db)
         {
             RemakePassCommand = new RelayCommand(Change);
-            _remakePassView = new RemakePassUserControl(user);
+            _remakePassView = new RemakePassUserControl(user, db);
             _remakePassView.Visibility = System.Windows.Visibility.Visible;
             _username = user.UserName;
         }

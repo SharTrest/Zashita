@@ -24,9 +24,11 @@
   </ItemGroup>
 
   <ItemGroup>
+    <None Remove="Resources\Images\admin.jpg" />
     <None Remove="Resources\Images\key-icon.png" />
     <None Remove="Resources\Images\LoginBackground.png" />
     <None Remove="Resources\Images\user-icon.png" />
+    <None Remove="Resources\Images\user.jpg" />
   </ItemGroup>
 
   <ItemGroup>
@@ -42,13 +44,15 @@
   </ItemGroup>
 
   <ItemGroup>
+    <Resource Include="Resources\Images\admin.jpg" />
     <Resource Include="Resources\Images\key-icon.png" />
     <Resource Include="Resources\Images\user-icon.png">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </Resource>
-    <Content Include="Resources\Images\LoginBackground.png">
+    <Resource Include="Resources\Images\user.jpg" />
+    <Resource Include="Resources\Images\LoginBackground.png">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
-    </Content>
+    </Resource>
   </ItemGroup>
 
   <ItemGroup>

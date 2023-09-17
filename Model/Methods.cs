@@ -1,4 +1,5 @@
 ﻿using System.Collections.Generic;
+using System.Collections.ObjectModel;
 using System.Linq;
 using System.Threading.Tasks;
 using Zashita.DAL.Context;
@@ -16,6 +17,8 @@ namespace Diplom.Client.Model
                 user.Authed = false;
                 return user.Authed;
             }
+            if (user.Password != u.Password) 
+                return false;
             user.Status = u.Status;
             user.Authed = true;
             return user.Authed;
@@ -28,21 +31,28 @@ namespace Diplom.Client.Model
             db.SaveChanges();
             return true;
         }
-        public static bool BanUserByName(ZashitaDB db, string name)
+        public static string BanUserByName(ZashitaDB db, string name)
         {
             var u = db.Users.FirstOrDefault(u=>u.UserName == name);
-            if (u == null)
+            if (u == null || u.Status == "A")
             {
-                return false;
+                return "";
             }
-            u.Status = "B";
+            if (u.Status == "B") 
+            { 
+                u.Status = "U";
+            }
+            else
+                u.Status = "B";
+
             db.Users.Update(u);
             db.SaveChanges();
-            return true;
+
+            return u.Status;
         }
-        public static List<User> ShowUsers(ZashitaDB db)
+        public static ObservableCollection<User> ShowUsers(ZashitaDB db)
         {
-            var u = db.Users.ToList();
+            var u = db.Users.ToObservableCollection();
             return u; 
         }
         public static bool ChangePasswordRules(ZashitaDB db)
@@ -50,7 +60,7 @@ namespace Diplom.Client.Model
             var u = ShowUsers(db);
             foreach (var user in u) 
             {
-                user.RulledPass = true;
+                user.RulledPass = !user.RulledPass;
                 db.Users.Update(user);
                 db.SaveChanges();
             }
@@ -60,10 +70,11 @@ namespace Diplom.Client.Model
         {
             var u = db.Users.FirstOrDefault(u => u.UserName == userName);
             if (u == null) return false;
-            u.RulledPass = true;
+            u.RulledPass = !u.RulledPass;
             db.Users.Update(u);
             db.SaveChanges();
             return true;
         }
+
     }
 }

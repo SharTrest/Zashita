@@ -1,11 +1,9 @@
 ﻿using Diplom.Client.Model;
 using Diplom.Utilities;
 using System;
-using System.Collections.Generic;
-using System.ComponentModel;
+using System.Linq;
 using System.Runtime.InteropServices;
 using System.Security;
-using System.Text;
 using System.Threading.Tasks;
 using System.Windows;
 using System.Windows.Input;
@@ -82,10 +80,21 @@ namespace Diplom.Client.ViewModel.MainWindowViewModel
 
         private bool CanExecuteRegCommand(object arg)
         {
-            if (Password == null || Password.Length < 5)
+            if (Password == null)
             {
-                ErrorMessage = "Длина пароля должна превышать 5 символов";
+                ErrorMessage = "Введите пароль";
                 return false;
+            }
+            var p1 = ConvertToUnsecureString(Password);
+
+            foreach (char c in p1) 
+            {
+                var count = p1.Count(chr => chr == c);
+                if (count > 1)
+                {
+                    ErrorMessage = "Символы в пароле не должны совпадать";
+                    return false;
+                }
             }
 
             if (RepeatPassword == null)
@@ -95,7 +104,7 @@ namespace Diplom.Client.ViewModel.MainWindowViewModel
             }
             else
             {
-                var p1 = ConvertToUnsecureString(Password);
+                
                 var p2 = ConvertToUnsecureString(RepeatPassword);
                 if (p1 != p2)
                 {

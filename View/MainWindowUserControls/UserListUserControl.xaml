@@ -5,8 +5,90 @@
              xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
              xmlns:local="clr-namespace:Diplom.Client.View.MainWindowUserControls"
              mc:Ignorable="d" 
-             d:DesignHeight="450" d:DesignWidth="800">
+             d:DesignHeight="450" 
+             d:DesignWidth="650"
+             >
     <Grid>
-            
+        <Grid.ColumnDefinitions>
+            <ColumnDefinition Width="400"/>
+            <ColumnDefinition Width="*"/>
+        </Grid.ColumnDefinitions>
+        
+        <ListBox ItemsSource="{Binding UserList}"
+                 SelectedItem="{Binding SelectedUser}"
+                 Background="Transparent"
+                 Width="400"
+                 Height="380"
+                 Grid.Column="0"
+                 Margin="0,15,0,0">
+            <ListBox.ItemTemplate>
+                <DataTemplate>
+                    <Border BorderThickness="2"
+                            BorderBrush="Gray"
+                            Width="385"
+                            >
+                        <WrapPanel Margin="5">
+                            <TextBlock FontSize="18" Text="{Binding Path=UserName}" Margin="5" Foreground="Gray"/>
+                            <TextBlock FontSize="18" Text="{Binding Path=Status}" Margin="5" Foreground="Gray"/>
+                            <TextBlock FontSize="18" Text="{Binding Path=RulledPass}" Margin="5" Foreground="Gray"/>
+                        </WrapPanel>
+                    </Border>
+                </DataTemplate>
+            </ListBox.ItemTemplate>
+        </ListBox>
+
+        <StackPanel Grid.Column="1"
+                    DataContext="{Binding SelectedUser}"
+                    Margin="0,20,0,0"
+                    Height="125"
+                    VerticalAlignment="Top">
+            <TextBlock Text="Выбранный пользователь"
+                       Foreground="Gray"
+                       HorizontalAlignment="Center"
+                       FontSize="16"/>
+            <TextBlock Foreground="Gray"
+                       FontSize="16"
+                       Margin="5,0,0,0"
+                       Text="{Binding UserName, UpdateSourceTrigger=PropertyChanged}"                
+                       />
+            <TextBlock Text="Статус" 
+                       Foreground="Gray"
+                       FontSize="16"
+                       Margin="5,0,0,0"/>
+            <TextBlock Foreground="Gray"
+                       FontSize="16"
+                       Margin="5,0,0,0"
+                       Text="{Binding Status, UpdateSourceTrigger=PropertyChanged}"                
+                       />
+            <TextBlock Text="Ограничения пароля" 
+                       Foreground="Gray"
+                       FontSize="16"
+                       Margin="5,0,0,0"/>
+            <TextBlock Foreground="Gray"
+                       FontSize="16"
+                       Margin="5,0,0,0"
+                       Text="{Binding RulledPass, UpdateSourceTrigger=PropertyChanged}"                
+                       />
+        </StackPanel>
+        <StackPanel Grid.Column="1"
+                    Margin="0,150,0,0">
+        <Button x:Name="Ban"
+                    Content="Заблокировать пользователя"
+                    Command="{Binding BanUserCommand}"
+                    Width="200"
+                    HorizontalAlignment="Center"
+                    Margin="5,10,5,5"
+                    Background="Transparent"
+                    Foreground="Gray"/>
+
+        <Button x:Name="Chng"
+                    Content="Ограничить пароль"
+                    Command="{Binding RuledPassCommand}"
+                    Width="200"
+                    Background="Transparent"
+                    Foreground="Gray" Height="19.96"
+                    HorizontalAlignment="Center"
+                    Margin="5"/>
+        </StackPanel>
     </Grid>
 </UserControl>

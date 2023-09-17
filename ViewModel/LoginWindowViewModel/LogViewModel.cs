@@ -4,7 +4,6 @@ using Diplom.View.Windows;
 using System;
 using System.Runtime.InteropServices;
 using System.Security;
-using System.Threading.Tasks;
 using System.Windows.Input;
 using Zashita.DAL.Context;
 

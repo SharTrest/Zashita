@@ -6,7 +6,7 @@
              xmlns:local="clr-namespace:Diplom.Client.Styles"
              mc:Ignorable="d" 
              d:DesignHeight="450" d:DesignWidth="800">
-    <Border BorderBrush="DarkGray"
+    <Border BorderBrush="Black"
             BorderThickness="0,0,0,1">
     <TextBox x:Name="txtUser"
                              FontSize="13"

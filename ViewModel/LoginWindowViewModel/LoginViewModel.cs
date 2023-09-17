@@ -1,7 +1,6 @@
 ﻿using Diplom.Utilities;
 using System.Windows.Input;
 using Diplom.Client.View.LoginWindowUserControls;
-using System;
 using Diplom.Client.Model;
 using Diplom.View.Windows;
 using Zashita.DAL.Context;

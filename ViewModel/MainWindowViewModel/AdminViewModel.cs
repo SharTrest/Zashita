@@ -1,11 +1,7 @@
 ﻿using Diplom.Client.Model;
 using Diplom.Client.View.LoginWindowUserControls;
+using Diplom.Client.View.MainWindowUserControls;
 using Diplom.Utilities;
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 using System.Windows.Input;
 using Zashita.DAL.Context;
 
@@ -17,7 +13,7 @@ namespace Diplom.Client.ViewModel.MainWindowViewModel
         private object _currentView;
         private UserData _user;
         private RemakePassUserControl _rpv;
-        private RemakePassUserControl _showListView;
+        private UserListUserControl _showListView;
         private RemakePassUserControl _banUserByNameView;
         public object CurrentView
         {
@@ -48,7 +44,8 @@ namespace Diplom.Client.ViewModel.MainWindowViewModel
             {
                 CurrentView = new RegisterUserControl(user, db);
             }
-            _rpv = new RemakePassUserControl(user);
+            _rpv = new RemakePassUserControl(user, db);
+            _showListView = new UserListUserControl(db);
             RemakePassCommand = new RelayCommand(Change, CanChange);
             ShowUsersListCommand = new RelayCommand(ShowList, CanShowList);
             BanUserByNameCommand = new RelayCommand(Ban, CanBan);

@@ -24,8 +24,7 @@
                  Converter="{StaticResource BooleanToVisibility}"/>
     </UserControl.Visibility>
     
-    <Border BorderBrush ="Gray"
-            BorderThickness="2">
+    <Border>
     <StackPanel Width="250"
                 Orientation="Vertical"
                 HorizontalAlignment="Center"

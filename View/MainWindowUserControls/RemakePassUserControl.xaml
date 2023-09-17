@@ -6,12 +6,13 @@
              xmlns:customcontrols="clr-namespace:Diplom.Client.Styles"
              xmlns:local="clr-namespace:Diplom.Client.View.LoginWindowUserControls"
              mc:Ignorable="d" 
-             d:DesignHeight="310" 
-             d:DesignWidth="255">
+             d:DesignHeight="350" 
+             d:DesignWidth="260">
     
-    <Border BorderBrush ="Gray"
+    <Border CornerRadius="20"
             BorderThickness="2"
-            Width="255">
+            Width="260"
+            Background="AliceBlue">
         <StackPanel  Width="250"
                 Orientation="Vertical"
                 HorizontalAlignment="Center"
@@ -70,7 +71,7 @@
                 <Button x:Name="btnRegister"
                             Command="{Binding RegisterCommand}"
                             BorderThickness="0"
-                            Content="Добавить пароль"
+                            Content="Изменить пароль"
                             Grid.Column="2"
                             FontSize="13"
                             FontFamily="Montserat"

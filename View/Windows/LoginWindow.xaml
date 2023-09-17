@@ -42,21 +42,6 @@
         <Border CornerRadius="20"
                 BorderThickness="4"
                 Opacity="0.75">
-            <Border.BorderBrush>
-                <LinearGradientBrush StartPoint="0,0" EndPoint="1,1">
-                    <GradientStop Color="DarkGray" Offset="0"/>
-                    <GradientStop Color="Gray" Offset="0.75"/>
-                    <GradientStop Color="Gray" Offset="1"/>
-                </LinearGradientBrush>
-            </Border.BorderBrush>
-
-            <Border.Background>
-                <LinearGradientBrush StartPoint="0,0" EndPoint="1,1">
-                    <GradientStop Color="Transparent"  Offset="0"/>
-                    <GradientStop Color="DarkGray" Offset="1"/>
-                </LinearGradientBrush>
-            </Border.Background>
-
             <Grid>
                 <Grid.RowDefinitions>
                     <RowDefinition Height="30"/>
@@ -73,7 +58,7 @@
                     </Grid.ColumnDefinitions>
 
                     <TextBlock Text="Авторизация"
-                               Foreground="#58350C"
+                               Foreground="AliceBlue"
                                FontSize="16"
                                FontFamily="Montserat"
                                VerticalAlignment="Center"
@@ -147,12 +132,17 @@
                     </Button>
 
                 </Grid>
-
-                <ContentControl Grid.Row="1" 
-                                Grid.Column="0"
-                                Margin="576,146,40,64"
-                                Content="{Binding CurrentView}"/>
-
+                <Border  Grid.Row="1" 
+                         Grid.Column="0"
+                         Margin="576,100,40,110"
+                         Background="AliceBlue"
+                         CornerRadius="30"
+                         Opacity="0.5"
+                         >
+                    <ContentControl 
+                                Content="{Binding CurrentView}"
+                                />
+                </Border>
             </Grid>
 
 
