@@ -112,6 +112,7 @@ namespace Diplom.Client.ViewModel.MainWindowViewModel
                     return false;
                 }
             }
+            ErrorMessage = "";
             _data.Password = ConvertToUnsecureString(Password);
             return true;
         }

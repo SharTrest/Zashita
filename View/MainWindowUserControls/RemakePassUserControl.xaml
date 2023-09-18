@@ -9,7 +9,7 @@
              d:DesignHeight="350" 
              d:DesignWidth="260">
     
-    <Border CornerRadius="20"
+    <Border
             BorderThickness="2"
             Width="260"
             Background="AliceBlue">

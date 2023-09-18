@@ -6,13 +6,22 @@
         xmlns:local="clr-namespace:Diplom.Client.View.Windows"
         mc:Ignorable="d"
         Title="UserMainWindow"
-         d:DesignHeight="450" 
-         d:DesignWidth="800"
-         Background="#212529">
+        Background="#212529"
+        Height="600" 
+        Width="940"
+        AllowsTransparency="True"
+        WindowStyle="None"
+        ResizeMode="NoResize"
+        WindowStartupLocation="CenterScreen"
+        MouseDown="Window_MouseDown">
+    
     <Grid>
         <Grid.ColumnDefinitions>
             <ColumnDefinition Width="250"/>
             <ColumnDefinition Width="*"/>
+            <ColumnDefinition Width="30"/>
+            <ColumnDefinition Width="30"/>
+            <ColumnDefinition Width="5"/>
         </Grid.ColumnDefinitions>
         <Grid.RowDefinitions>
             <RowDefinition Height="30"/>
@@ -75,5 +84,73 @@
             <ContentControl x:Name="ChangePass"
                             Content="{Binding CurrentView}"/>
         </StackPanel>
+
+        <Button x:Name="btnMinimize"
+                            BorderThickness="0"
+                            Content="-"
+                            Grid.Column="2"
+                            FontSize="16"
+                            FontFamily="Montserat"
+                            Cursor="Hand"
+                            Click="BtnMinimize_Click"
+                            Foreground="White">
+
+            <Button.Style>
+                <Style TargetType="{x:Type Button}">
+                    <Setter Property="Background" Value="Gray"/>
+                    <Style.Triggers>
+                        <Trigger Property="IsMouseOver" Value="True">
+                            <Setter Property="Background" Value="DarkGray"/>
+                        </Trigger>
+                    </Style.Triggers>
+                </Style>
+            </Button.Style>
+
+            <Button.Template>
+                <ControlTemplate TargetType="{x:Type Button}">
+                    <Border Width="18" Height="18"
+                                        CornerRadius="9"
+                                        Background="{TemplateBinding Background}">
+                        <ContentPresenter VerticalAlignment="Center"
+                                                      HorizontalAlignment="Center"/>
+                    </Border>
+                </ControlTemplate>
+            </Button.Template>
+
+        </Button>
+
+        <Button x:Name="btnClose"
+                            BorderThickness="0"
+                            Content="X"
+                            Grid.Column="3"
+                            FontSize="13"
+                            FontFamily="Montserat"
+                            Cursor="Hand"
+                            Click="btnClose_Click"
+                            Foreground="White">
+
+            <Button.Style>
+                <Style TargetType="{x:Type Button}">
+                    <Setter Property="Background" Value="#DA34AE"/>
+                    <Style.Triggers>
+                        <Trigger Property="IsMouseOver" Value="True">
+                            <Setter Property="Background" Value="#C62DAE"/>
+                        </Trigger>
+                    </Style.Triggers>
+                </Style>
+            </Button.Style>
+
+            <Button.Template>
+                <ControlTemplate TargetType="{x:Type Button}">
+                    <Border Width="18" Height="18"
+                                        CornerRadius="9"
+                                        Background="{TemplateBinding Background}">
+                        <ContentPresenter VerticalAlignment="Center"
+                                                      HorizontalAlignment="Center"/>
+                    </Border>
+                </ControlTemplate>
+            </Button.Template>
+        </Button>
+
     </Grid>
 </Window>
