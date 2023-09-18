@@ -11,6 +11,7 @@ namespace Diplom.Client.ViewModel.MainWindowViewModel
         private readonly string _username;
         private object _currentView;
         private RemakePassUserControl _rpv;
+        private UserList _db;
 
         public object CurrentView
         {
@@ -23,7 +24,7 @@ namespace Diplom.Client.ViewModel.MainWindowViewModel
         public ICommand ShowCreaterCommand { get; set; }
 
         private void Change(object obj) => CurrentView = _rpv;
-        private void Show(object obj) => MessageBox.Show("Снетков Никита. 19. Отсутствие повторяющихся символов.", "Справка");
+        private void Show(object obj) => MessageBox.Show(_db.Creator, "Справка");
 
         public UserViewModel(UserData user, UserList db)
         {
@@ -35,6 +36,7 @@ namespace Diplom.Client.ViewModel.MainWindowViewModel
             RemakePassCommand = new RelayCommand(Change, CanChange);
             _rpv = new RemakePassUserControl(user, db);
             _username = user.UserName;
+            _db = db;
         }
 
         private bool CanChange(object arg) => true;

@@ -4,6 +4,7 @@ using Diplom.Client.View.LoginWindowUserControls;
 using Diplom.Client.Model;
 using Diplom.View.Windows;
 using System.Windows;
+using MathCore.WPF.Converters;
 
 namespace Diplom.Client.ViewModel.LoginWindowViewModel
 {
@@ -15,6 +16,8 @@ namespace Diplom.Client.ViewModel.LoginWindowViewModel
         private LoginUserControl login;
         private RegisterUserControl register;
         private bool _isViewVisible = true;
+        private UserList _db;
+
         public bool IsViewVisible
         {
             get { return _isViewVisible; }
@@ -41,11 +44,12 @@ namespace Diplom.Client.ViewModel.LoginWindowViewModel
         public ICommand ShowCreaterCommand { get; set; }
 
         private void Log(object obj) => CurrentView = login;
-        private void Show(object obj) => MessageBox.Show("Снетков Никита. 19. Отсутствие повторяющихся символов.", "Справка");
+        private void Show(object obj) => MessageBox.Show(_db.Creator, "Справка");
 
 
         public LoginViewModel(UserData user, LoginWindow wind, UserList dB)
         {
+            _db = dB;
             register = new RegisterUserControl(user, dB);
             login = new LoginUserControl(user, wind, dB);
             IsViewVisible = user.Authed;

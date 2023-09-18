@@ -20,9 +20,11 @@ namespace Diplom.Client.Model
             }
         }
         public string FileName { get; set; }
+        public string Creator { get; set; }
 
         public UserList()
         {
+            Creator = "Снетков Никита. 19. Отсутствие повторяющихся символов.";
             FileName = "Database.txt";
             _users = new List<User>();
             if (!File.Exists(this.FileName))

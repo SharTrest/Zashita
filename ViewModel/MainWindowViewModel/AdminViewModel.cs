@@ -16,6 +16,7 @@ namespace Diplom.Client.ViewModel.MainWindowViewModel
         private RemakePassUserControl _rpv;
         private UserListUserControl _showListView;
         private RemakePassUserControl _banUserByNameView;
+        private UserList _db;
         public object CurrentView
         {
             get
@@ -38,7 +39,7 @@ namespace Diplom.Client.ViewModel.MainWindowViewModel
         private void Change(object obj) => CurrentView = _rpv;
         private void ShowList(object obj) => CurrentView = _showListView;
         private void Ban(object obj) => CurrentView = _banUserByNameView;
-        private void Show(object obj) => MessageBox.Show("Снетков Никита. 19. Отсутствие повторяющихся символов.", "Справка");
+        private void Show(object obj) => MessageBox.Show(_db.Creator, "Справка");
 
         public AdminViewModel(UserData user, UserList db)
         {
@@ -54,7 +55,7 @@ namespace Diplom.Client.ViewModel.MainWindowViewModel
             ShowCreaterCommand = new RelayCommand(Show);
             _username = user.UserName;
             _user = user;
-
+            _db = db;
         }
 
         private bool CanBan(object arg) => _user.Password != "";
