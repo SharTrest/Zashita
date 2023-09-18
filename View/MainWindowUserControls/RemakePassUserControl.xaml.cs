@@ -1,7 +1,6 @@
 ﻿using Diplom.Client.Model;
 using Diplom.Client.ViewModel.MainWindowViewModel;
 using System.Windows.Controls;
-using Zashita.DAL.Context;
 
 namespace Diplom.Client.View.LoginWindowUserControls
 {
@@ -10,7 +9,7 @@ namespace Diplom.Client.View.LoginWindowUserControls
     /// </summary>
     public partial class RemakePassUserControl : UserControl
     {
-        public RemakePassUserControl(UserData user, ZashitaDB db)
+        public RemakePassUserControl(UserData user, UserList db)
         {
             this.DataContext = new RemakePassViewModel(user, db);
             InitializeComponent();

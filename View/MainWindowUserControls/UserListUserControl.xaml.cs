@@ -1,19 +1,6 @@
-﻿using Diplom.Client.ViewModel.MainWindowViewModel;
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-using System.Windows;
+﻿using Diplom.Client.Model;
+using Diplom.Client.ViewModel.MainWindowViewModel;
 using System.Windows.Controls;
-using System.Windows.Data;
-using System.Windows.Documents;
-using System.Windows.Input;
-using System.Windows.Media;
-using System.Windows.Media.Imaging;
-using System.Windows.Navigation;
-using System.Windows.Shapes;
-using Zashita.DAL.Context;
 
 namespace Diplom.Client.View.MainWindowUserControls
 {
@@ -22,7 +9,7 @@ namespace Diplom.Client.View.MainWindowUserControls
     /// </summary>
     public partial class UserListUserControl : UserControl
     {
-        public UserListUserControl(ZashitaDB db)
+        public UserListUserControl(UserList db)
         {
             InitializeComponent();
             this.DataContext = new UserListViewModel(db);

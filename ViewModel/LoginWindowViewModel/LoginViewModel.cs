@@ -3,7 +3,6 @@ using System.Windows.Input;
 using Diplom.Client.View.LoginWindowUserControls;
 using Diplom.Client.Model;
 using Diplom.View.Windows;
-using Zashita.DAL.Context;
 
 namespace Diplom.Client.ViewModel.LoginWindowViewModel
 {
@@ -43,7 +42,7 @@ namespace Diplom.Client.ViewModel.LoginWindowViewModel
         private void Log(object obj) => CurrentView = login;
 
 
-        public LoginViewModel(UserData user, LoginWindow wind, ZashitaDB dB)
+        public LoginViewModel(UserData user, LoginWindow wind, UserList dB)
         {
             register = new RegisterUserControl(user, dB);
             login = new LoginUserControl(user, wind, dB);

@@ -39,5 +39,6 @@ namespace Diplom.Client.Model
             set { _pass = value; }
             get { return _pass; }
         }
+
     }
 }

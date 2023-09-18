@@ -1,25 +1,24 @@
 ﻿using Diplom.Client.Model;
 using Diplom.Client.View.Windows;
 using Diplom.View.Windows;
+using System.IO;
 using System.Linq;
 using System.Windows;
-using Zashita.DAL.Context;
+using System.Text;
+using System;
 
 namespace Diplom
 {
     public partial class App : Application
     {
         private UserData user;
-        private ZashitaDB db;
+        private UserList db;
         private void Application_Startup(object sender, StartupEventArgs e)
         {
             user = new UserData();
-            db = new ZashitaDB();
-            if (!db.Users.Any())
-            {
-                db.Users.AddAsync(new Zashita.DAL.Entity.User { UserName = "ADMIN", Password = "", Status = "A", RulledPass = false });
-                db.SaveChangesAsync();
-            }
+            db = new UserList();
+
+
             var loginView = new LoginWindow(user, db);
             loginView.Show();
             loginView.IsVisibleChanged += (s, ev) =>
@@ -40,6 +39,15 @@ namespace Diplom
         }
         protected override async void OnExit(ExitEventArgs e)
         {
+            File.WriteAllText(db.FileName,"");
+            using (StreamWriter fs = new StreamWriter(db.FileName))
+            {
+                foreach (var user in db.Users)
+                {
+                    var str = user.UserName + "," + user.Password + "," + user.Status + "," + user.RulledPass.ToString() + "\n";
+                    fs.Write(str);
+                }
+            }
             base.OnExit(e);
         }
     }

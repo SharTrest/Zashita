@@ -2,7 +2,6 @@
 using Diplom.Client.ViewModel.LoginWindowViewModel;
 using System.Windows;
 using System.Windows.Input;
-using Zashita.DAL.Context;
 
 namespace Diplom.View.Windows
 {
@@ -11,7 +10,7 @@ namespace Diplom.View.Windows
     /// </summary>
     public partial class LoginWindow : Window
     {
-        public LoginWindow(UserData user, ZashitaDB db)
+        public LoginWindow(UserData user, UserList db)
         {
             this.DataContext = new LoginViewModel(user, this, db);
             InitializeComponent();

@@ -4,14 +4,14 @@ using Diplom.View.Windows;
 using System;
 using System.Runtime.InteropServices;
 using System.Security;
+using System.Windows;
 using System.Windows.Input;
-using Zashita.DAL.Context;
 
 namespace Diplom.Client.ViewModel.LoginWindowViewModel
 {
     public class LogViewModel : ViewModelBase
     {
-        private static ZashitaDB _db;
+        private static UserList _db;
         private static UserData _data;
         private LoginWindow _window;
         private int _countAttempts;
@@ -90,7 +90,7 @@ namespace Diplom.Client.ViewModel.LoginWindowViewModel
         public ICommand ShowRemakePasswordViewCommand { get; }
 
         //
-        public LogViewModel(UserData user, LoginWindow wind, ZashitaDB dB)
+        public LogViewModel(UserData user, LoginWindow wind, UserList dB)
         {
             CountAttempts = 0;
             LoginCommand = new RelayCommand(ExucuteLoginCommand, CanExecuteLoginCommand);
@@ -114,7 +114,7 @@ namespace Diplom.Client.ViewModel.LoginWindowViewModel
         private bool CanExecuteLoginCommand(object obj)
         {
             bool validData;
-            if (string.IsNullOrWhiteSpace(Username) || Username.Length < 3)
+            if (string.IsNullOrWhiteSpace(Username))
                 validData = false;
             else
                 validData = true;
@@ -129,16 +129,18 @@ namespace Diplom.Client.ViewModel.LoginWindowViewModel
             var isValid = Methods.IsValidUser(_db, _data);
             if (isValid)
             {
-                _data.Authed = true;
                 _window.Hide();
                 ErrorMessage = null;
                 IsViewVisible = false;
+                _data.Authed = true;
             }
             else
             {
                 CountAttempts += 1;
                 ErrorMessage = "Неверный логин или пароль";
             }
+            if (_data.Status == "B")
+                MessageBox.Show("Вы забанены. УВЫ!");
         }
         public static string ConvertToUnsecureString(SecureString secureString)
         {

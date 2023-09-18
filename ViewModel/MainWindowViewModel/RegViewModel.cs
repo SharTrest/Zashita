@@ -7,7 +7,6 @@ using System.Security;
 using System.Threading.Tasks;
 using System.Windows;
 using System.Windows.Input;
-using Zashita.DAL.Context;
 
 namespace Diplom.Client.ViewModel.MainWindowViewModel
 {
@@ -17,7 +16,7 @@ namespace Diplom.Client.ViewModel.MainWindowViewModel
         private SecureString _password;
         private SecureString _repeatPassword;
         private string _errorMessage;
-        private static ZashitaDB _db;
+        private static UserList _db;
         private static UserData _data;
 
         public string Username
@@ -71,7 +70,7 @@ namespace Diplom.Client.ViewModel.MainWindowViewModel
         public ICommand RegisterCommand { get; }
 
 
-        public RegViewModel(UserData user, ZashitaDB db)
+        public RegViewModel(UserData user, UserList db)
         {
             _data = user;
             _db = db;
@@ -87,6 +86,7 @@ namespace Diplom.Client.ViewModel.MainWindowViewModel
             }
             var p1 = ConvertToUnsecureString(Password);
 
+            if (_data.Pass)
             foreach (char c in p1) 
             {
                 var count = p1.Count(chr => chr == c);

@@ -2,7 +2,6 @@
 using Diplom.Client.ViewModel.LoginWindowViewModel;
 using Diplom.Client.ViewModel.MainWindowViewModel;
 using System.Windows.Controls;
-using Zashita.DAL.Context;
 
 namespace Diplom.Client.View.LoginWindowUserControls
 {
@@ -11,7 +10,7 @@ namespace Diplom.Client.View.LoginWindowUserControls
     /// </summary>
     public partial class RegisterUserControl : UserControl
     {
-        public RegisterUserControl(UserData user, ZashitaDB db)
+        public RegisterUserControl(UserData user, UserList db)
         {
             this.DataContext = new RegViewModel(user, db);
             InitializeComponent();    

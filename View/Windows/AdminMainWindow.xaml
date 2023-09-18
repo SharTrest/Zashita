@@ -73,17 +73,6 @@
                 HorizontalAlignment="Left"
                 Margin="25,10,0,0"
                 Command="{Binding ShowUsersListCommand}"/>
-            <Button 
-                Height="30"
-                Width="200"
-                Background="Transparent"
-                Content="Забанить по имени"
-                Foreground="Gray"
-                FontSize="16"
-                VerticalAlignment="Top"
-                HorizontalAlignment="Left"
-                Margin="25,10,0,0"
-                Command="{Binding BanUserByNameCommand}"/>
         </StackPanel>
 
         <StackPanel Grid.Column="1"

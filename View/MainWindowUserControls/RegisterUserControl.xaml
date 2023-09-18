@@ -10,6 +10,7 @@
              d:DesignHeight="350" 
              d:DesignWidth="260">
     <Border BorderBrush ="Gray"
+            Background="AliceBlue"
             BorderThickness="2"
             Width="260">
         <StackPanel  Width="250"

@@ -55,8 +55,4 @@
     </Resource>
   </ItemGroup>
 
-  <ItemGroup>
-    <ProjectReference Include="..\Zashita.DAL\Zashita.DAL.csproj" />
-  </ItemGroup>
-
 </Project>

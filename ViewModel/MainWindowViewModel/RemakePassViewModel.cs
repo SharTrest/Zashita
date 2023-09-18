@@ -6,7 +6,6 @@ using System.Runtime.InteropServices;
 using System.Security;
 using System.Windows;
 using System.Windows.Input;
-using Zashita.DAL.Context;
 
 namespace Diplom.Client.ViewModel.MainWindowViewModel
 {
@@ -15,7 +14,7 @@ namespace Diplom.Client.ViewModel.MainWindowViewModel
         private SecureString _password;
         private SecureString _repeatPassword;
         private SecureString _newPassword;
-        private static ZashitaDB _db;
+        private static UserList _db;
         private static UserData _user;
         private string _errorMessage;
 
@@ -70,7 +69,7 @@ namespace Diplom.Client.ViewModel.MainWindowViewModel
 
         public ICommand RegisterCommand { get; }
 
-        public RemakePassViewModel(UserData user, ZashitaDB db)   
+        public RemakePassViewModel(UserData user, UserList db)   
         {
             _db = db;
             _user = user;

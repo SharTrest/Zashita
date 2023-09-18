@@ -42,11 +42,12 @@
                    TextAlignment="Center"
                    Text="{Binding UserName}"/>
         </StackPanel>
-        <StackPanel Grid.Column="1"
+        <StackPanel Grid.Column="0"
                     Grid.Row="1"
                     Width="260"
+                    Margin="0,150"
                     HorizontalAlignment="Left">
-        <Button 
+            <Button 
                 Height="30"
                 Width="200"
                 Background="Transparent"
@@ -55,8 +56,14 @@
                 FontSize="16"
                 VerticalAlignment="Top"
                 HorizontalAlignment="Left"
-                Margin="25"
-                Command="{Binding RemakePass}"/>
+                Margin="25,50"
+                Command="{Binding RemakePassCommand}"/>
+        </StackPanel>
+        
+        <StackPanel Grid.Column="1"
+                    Grid.Row="1"
+                    HorizontalAlignment="Left"
+                    >
             <ContentControl x:Name="ChangePass"
                             Content="{Binding CurrentView}"/>
         </StackPanel>

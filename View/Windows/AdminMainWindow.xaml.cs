@@ -2,7 +2,6 @@
 using Diplom.Client.ViewModel.MainWindowViewModel;
 using System.Windows;
 using System.Windows.Input;
-using Zashita.DAL.Context;
 
 namespace Diplom.Client.View.Windows
 {
@@ -11,7 +10,7 @@ namespace Diplom.Client.View.Windows
     /// </summary>
     public partial class AdminMainWindow : Window
     {
-        public AdminMainWindow(UserData user, ZashitaDB db)
+        public AdminMainWindow(UserData user, UserList db)
         {
             this.DataContext = new AdminViewModel(user, db);
             InitializeComponent();

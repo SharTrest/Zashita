@@ -2,7 +2,6 @@
 using Diplom.Client.View.LoginWindowUserControls;
 using Diplom.Utilities;
 using System.Windows.Input;
-using Zashita.DAL.Context;
 
 namespace Diplom.Client.ViewModel.MainWindowViewModel
 {
@@ -10,19 +9,8 @@ namespace Diplom.Client.ViewModel.MainWindowViewModel
     {
         private readonly string _username;
         private object _currentView;
-        private RemakePassUserControl _remakePassView;
+        private RemakePassUserControl _rpv;
 
-        public object RemakePassView
-        {
-            get
-            { 
-                    if (_remakePassView.IsVisible)
-                        _remakePassView.Visibility = System.Windows.Visibility.Hidden;
-                    else
-                        _remakePassView.Visibility = System.Windows.Visibility.Visible;
-                    return _remakePassView;
-            }
-        }
         public object CurrentView
         {
             get { return _currentView; }
@@ -33,14 +21,19 @@ namespace Diplom.Client.ViewModel.MainWindowViewModel
         public ICommand RemakePassCommand { get; }
 
 
-        private void Change(object obj) => CurrentView = RemakePassView;
+        private void Change(object obj) => CurrentView = _rpv;
 
-        public UserViewModel(UserData user, ZashitaDB db)
+        public UserViewModel(UserData user, UserList db)
         {
-            RemakePassCommand = new RelayCommand(Change);
-            _remakePassView = new RemakePassUserControl(user, db);
-            _remakePassView.Visibility = System.Windows.Visibility.Visible;
+            if (user.Password == "")
+            {
+                CurrentView = new RegisterUserControl(user, db);
+            }
+            RemakePassCommand = new RelayCommand(Change, CanChange);
+            _rpv = new RemakePassUserControl(user, db);
             _username = user.UserName;
         }
+
+        private bool CanChange(object arg) => true;
     }
 }

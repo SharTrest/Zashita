@@ -1,37 +1,40 @@
 ﻿using System.Collections.Generic;
 using System.Collections.ObjectModel;
+using System.IO;
 using System.Linq;
-using System.Threading.Tasks;
-using Zashita.DAL.Context;
-using Zashita.DAL.Entity;
+
+
 
 namespace Diplom.Client.Model
 {
     public static class Methods
     {
-        public static bool IsValidUser(ZashitaDB db, UserData user)
+        public static bool IsValidUser(UserList db, UserData user)
         {
-            var u = db.Users.FirstOrDefault(u=> u.UserName == user.UserName);
-            if (u == null || u.Status =="B")
+            var u = db.Users.Find(u => u.UserName == user.UserName);
+            if (u == null)
             {
                 user.Authed = false;
                 return user.Authed;
             }
-            if (user.Password != u.Password) 
-                return false;
+            if (user.Password != u.Password || u.Status == "B")
+            {
+                user.Status = u.Status;
+                    return false;
+                }
             user.Status = u.Status;
             user.Authed = true;
+            user.Pass = u.RulledPass;
             return user.Authed;
         }
-        public static bool ChangePassword(ZashitaDB db, UserData user)
+        public static bool ChangePassword(UserList db, UserData user)
         {
             var u = db.Users.FirstOrDefault(u=> u.UserName == user.UserName);
             u.Password = user.Password;
-            db.Users.Update(u);
-            db.SaveChanges();
+            
             return true;
         }
-        public static string BanUserByName(ZashitaDB db, string name)
+        public static string BanUserByName(UserList db, string name)
         {
             var u = db.Users.FirstOrDefault(u=>u.UserName == name);
             if (u == null || u.Status == "A")
@@ -44,41 +47,43 @@ namespace Diplom.Client.Model
             }
             else
                 u.Status = "B";
-
-            db.Users.Update(u);
-            db.SaveChanges();
-
             return u.Status;
         }
-        public static ObservableCollection<User> ShowUsers(ZashitaDB db)
+        public static ObservableCollection<User> ShowUsers(UserList db)
         {
             var u = db.Users.ToObservableCollection();
             return u; 
         }
-        public static bool ChangePasswordRules(ZashitaDB db)
+        public static bool ChangePasswordRules(UserList db)
         {
             var u = ShowUsers(db);
+            bool pr = db.Users[0].RulledPass;
+            foreach (var us in db.Users)
+            {
+                us.RulledPass = !pr;
+            }
             foreach (var user in u) 
             {
-                user.RulledPass = !user.RulledPass;
-                db.Users.Update(user);
-                db.SaveChanges();
+                user.RulledPass = !pr;
             }
             return true;
         }
-        public static bool ChangePassRiulesByName(ZashitaDB db, string userName)
+        public static bool ChangePassRiulesByName(UserList db, string userName)
         {
             var u = db.Users.FirstOrDefault(u => u.UserName == userName);
             if (u == null) return false;
             u.RulledPass = !u.RulledPass;
-            db.Users.Update(u);
-            db.SaveChanges();
+            
             return true;
         }
-        public static void AddNewUSer(ZashitaDB db, string userName)
+        public static void AddNewUSer(UserList db, string userName)
         {
             db.Users.Add(new User { UserName = userName, Password = "", Status = "U", RulledPass = false});
-            db.SaveChanges();
+            string newStr = userName + "," + "," + "U" + "," + "False";
+            using (StreamWriter fs = File.CreateText(db.FileName))
+            {
+                fs.WriteLine(newStr);
+            }
         }
 
     }

@@ -6,8 +6,7 @@ using System.Collections.ObjectModel;
 using System.Linq;
 using System.Windows;
 using System.Windows.Input;
-using Zashita.DAL.Context;
-using Zashita.DAL.Entity;
+
 
 namespace Diplom.Client.ViewModel.MainWindowViewModel
 {
@@ -15,7 +14,7 @@ namespace Diplom.Client.ViewModel.MainWindowViewModel
     {
         private string _userName;
         private User _user;
-        private ZashitaDB _db;
+        private UserList _db;
         private ObservableCollection<User> _users;
         public ObservableCollection<User> UserList
         {
@@ -55,7 +54,7 @@ namespace Diplom.Client.ViewModel.MainWindowViewModel
         public ICommand AddNewUserCommand { get; }
         public ICommand ChangeRulesCommand { get; }
 
-        public UserListViewModel(ZashitaDB db)
+        public UserListViewModel(UserList db)
         {
             _db = db;
             _users = Methods.ShowUsers(db);

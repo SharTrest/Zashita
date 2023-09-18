@@ -3,7 +3,7 @@ using Diplom.Client.View.LoginWindowUserControls;
 using Diplom.Client.View.MainWindowUserControls;
 using Diplom.Utilities;
 using System.Windows.Input;
-using Zashita.DAL.Context;
+
 
 namespace Diplom.Client.ViewModel.MainWindowViewModel
 {
@@ -38,7 +38,7 @@ namespace Diplom.Client.ViewModel.MainWindowViewModel
         private void Ban(object obj) => CurrentView = _banUserByNameView;
 
 
-        public AdminViewModel(UserData user, ZashitaDB db)
+        public AdminViewModel(UserData user, UserList db)
         {
             if (user.Password == "") 
             {
@@ -55,19 +55,10 @@ namespace Diplom.Client.ViewModel.MainWindowViewModel
 
         }
 
-        private bool CanBan(object arg)
-        {
-            return _user.Password != "";
-        }
+        private bool CanBan(object arg) => _user.Password != "";
 
-        private bool CanShowList(object arg)
-        {
-            return _user.Password != "";
-        }
+        private bool CanShowList(object arg) => _user.Password != "";
 
-        private bool CanChange(object arg)
-        {
-            return _user.Password != "";
-        }
+        private bool CanChange(object arg) => _user.Password != "";
     }
 }
