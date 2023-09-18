@@ -3,6 +3,7 @@ using System.Windows.Input;
 using Diplom.Client.View.LoginWindowUserControls;
 using Diplom.Client.Model;
 using Diplom.View.Windows;
+using System.Windows;
 
 namespace Diplom.Client.ViewModel.LoginWindowViewModel
 {
@@ -37,9 +38,10 @@ namespace Diplom.Client.ViewModel.LoginWindowViewModel
         }
 
         public ICommand LogCommand { get; set; }
-
+        public ICommand ShowCreaterCommand { get; set; }
 
         private void Log(object obj) => CurrentView = login;
+        private void Show(object obj) => MessageBox.Show("Снетков Никита. 19. Отсутствие повторяющихся символов.", "Справка");
 
 
         public LoginViewModel(UserData user, LoginWindow wind, UserList dB)
@@ -48,6 +50,7 @@ namespace Diplom.Client.ViewModel.LoginWindowViewModel
             login = new LoginUserControl(user, wind, dB);
             IsViewVisible = user.Authed;
             LogCommand = new RelayCommand(Log);
+            ShowCreaterCommand = new RelayCommand(Show);
             CurrentView = login;
         }
     }

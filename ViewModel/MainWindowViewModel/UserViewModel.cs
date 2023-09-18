@@ -1,6 +1,7 @@
 ﻿using Diplom.Client.Model;
 using Diplom.Client.View.LoginWindowUserControls;
 using Diplom.Utilities;
+using System.Windows;
 using System.Windows.Input;
 
 namespace Diplom.Client.ViewModel.MainWindowViewModel
@@ -19,9 +20,10 @@ namespace Diplom.Client.ViewModel.MainWindowViewModel
         public string UserName => _username;
 
         public ICommand RemakePassCommand { get; }
-
+        public ICommand ShowCreaterCommand { get; set; }
 
         private void Change(object obj) => CurrentView = _rpv;
+        private void Show(object obj) => MessageBox.Show("Снетков Никита. 19. Отсутствие повторяющихся символов.", "Справка");
 
         public UserViewModel(UserData user, UserList db)
         {
@@ -29,6 +31,7 @@ namespace Diplom.Client.ViewModel.MainWindowViewModel
             {
                 CurrentView = new RegisterUserControl(user, db);
             }
+            ShowCreaterCommand = new RelayCommand(Show);
             RemakePassCommand = new RelayCommand(Change, CanChange);
             _rpv = new RemakePassUserControl(user, db);
             _username = user.UserName;

@@ -63,7 +63,15 @@
                                FontFamily="Montserat"
                                VerticalAlignment="Center"
                                Margin="10,0,0,0"/>
-
+                    
+                    <Button Content="Справка"
+                            Command="{Binding ShowCreaterCommand}"
+                            Foreground="AliceBlue"
+                            Background="Transparent"
+                            Width="100"
+                            HorizontalAlignment="Left"
+                            Margin="110,0"/>
+                    
                     <Button x:Name="btnMinimize"
                             BorderThickness="0"
                             Content="-"

@@ -27,7 +27,13 @@
             <RowDefinition Height="*"/>
         </Grid.RowDefinitions>
 
-     
+        <Button Content="Справка"
+                            Command="{Binding ShowCreaterCommand}"
+                            Foreground="AliceBlue"
+                            Background="Transparent"
+                            Width="100"
+                            HorizontalAlignment="Left"
+                            />
 
         <StackPanel Grid.Row="1">
             <Border Grid.Column="0"
