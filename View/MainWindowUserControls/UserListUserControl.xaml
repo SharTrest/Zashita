@@ -9,18 +9,59 @@
              d:DesignWidth="650"
              >
     <Grid>
+        
         <Grid.ColumnDefinitions>
-            <ColumnDefinition Width="400"/>
+            <ColumnDefinition Width="420"/>
             <ColumnDefinition Width="*"/>
         </Grid.ColumnDefinitions>
         
+        <WrapPanel>
+            <TextBox Text="{Binding Path=FindUserName, Mode=TwoWay,UpdateSourceTrigger=PropertyChanged}"
+                     Height="20"
+                     VerticalAlignment="Top"
+                     Margin="10,15"
+                     HorizontalAlignment="Left"
+                     Width="100"
+                     Background="Transparent"
+                     Foreground="Gray"/>
+
+            <Button Content="Добавить"
+                    Command="{Binding AddNewUserCommand}"
+                    Width="100"
+                    Height="20"
+                    Background="Transparent"
+                    Foreground="Gray"
+                    />
+
+            <Button Content="Заблокировать"
+                    Command="{Binding BanUserByNameCommand}"
+                    Width="100"
+                    Height="20"
+                    Background="Transparent"
+                    Foreground="Gray"
+                    Margin="5,0"
+                    />
+            
+        </WrapPanel>
+
+        <Button Content="Добавить/Снять ограничение на все пароли"
+                Height="20"
+                Width="255"
+                HorizontalAlignment="Left"
+                VerticalAlignment="Top"
+                Margin="10,50,50,0"
+                Background="Transparent"
+                Foreground="Gray"
+                Command="{Binding ChangeRulesCommand}"
+                />
+
         <ListBox ItemsSource="{Binding UserList}"
                  SelectedItem="{Binding SelectedUser}"
                  Background="Transparent"
                  Width="400"
                  Height="380"
                  Grid.Column="0"
-                 Margin="0,15,0,0">
+                 Margin="0,100,0,0">
             <ListBox.ItemTemplate>
                 <DataTemplate>
                     <Border BorderThickness="2"
@@ -70,6 +111,7 @@
                        Text="{Binding RulledPass, UpdateSourceTrigger=PropertyChanged}"                
                        />
         </StackPanel>
+        
         <StackPanel Grid.Column="1"
                     Margin="0,150,0,0">
         <Button x:Name="Ban"
@@ -90,5 +132,6 @@
                     HorizontalAlignment="Center"
                     Margin="5"/>
         </StackPanel>
+        
     </Grid>
 </UserControl>

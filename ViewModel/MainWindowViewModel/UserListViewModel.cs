@@ -1,5 +1,7 @@
 ﻿using Diplom.Client.Model;
 using Diplom.Utilities;
+using MathCore.WPF;
+using System;
 using System.Collections.ObjectModel;
 using System.Linq;
 using System.Windows;
@@ -11,6 +13,7 @@ namespace Diplom.Client.ViewModel.MainWindowViewModel
 {
     public class UserListViewModel : ViewModelBase
     {
+        private string _userName;
         private User _user;
         private ZashitaDB _db;
         private ObservableCollection<User> _users;
@@ -36,21 +39,73 @@ namespace Diplom.Client.ViewModel.MainWindowViewModel
                 OnPropertyChanged();
             }
         }
+        public string FindUserName
+        {
+            get => _userName;
+            set
+            {
+                _userName = value;
+                OnPropertyChanged();
+            }
+        }
 
         public ICommand BanUserCommand { get; }
         public ICommand RuledPassCommand { get; }
+        public ICommand BanUserByNameCommand { get; }
+        public ICommand AddNewUserCommand { get; }
+        public ICommand ChangeRulesCommand { get; }
 
         public UserListViewModel(ZashitaDB db)
         {
             _db = db;
             _users = Methods.ShowUsers(db);
+            ChangeRulesCommand = new RelayCommand(ExecuteChangeRulesCommand);
+            BanUserByNameCommand = new RelayCommand(ExecuteBanUserByNameCommand, CanExecuteAddNewUserCommand);
+            AddNewUserCommand = new RelayCommand(ExecuteAddNewUserCommand, CanExecuteAddNewUserCommand);
             BanUserCommand = new RelayCommand(ExecuteBanCommand, CanExecuteBanCommand);
             RuledPassCommand = new RelayCommand(ExecuteRulledCommand, CanExecuteBanCommand);
         }
 
+        private void ExecuteChangeRulesCommand(object obj)
+        {
+            Methods.ChangePasswordRules(_db);
+            MessageBox.Show("Включено ограничение паролей");
+            UserList = Methods.ShowUsers(_db);
+        }
+
+        private void ExecuteBanUserByNameCommand(object obj)
+        {
+            if (UserList.Find(u => u.UserName == FindUserName) == null)
+            {
+                MessageBox.Show("Пользлователь не найден");
+                return;
+            }
+            Methods.BanUserByName(_db, FindUserName);
+            MessageBox.Show($"Пользователь {FindUserName} забанен");
+            UserList = Methods.ShowUsers(_db);
+        }
+
+        private void ExecuteAddNewUserCommand(object obj)
+        {
+            if (UserList.Find(u => u.UserName == FindUserName) != null)
+            {
+                MessageBox.Show($"Пользлователь с именем {FindUserName} уже существует");
+                return;
+            }
+            Methods.AddNewUSer(_db, FindUserName);
+            MessageBox.Show($"Пользователь {FindUserName} добавлен");
+            UserList = Methods.ShowUsers(_db);
+        }
+
+        private bool CanExecuteAddNewUserCommand(object arg)
+        {
+         
+            return FindUserName != null;
+        }
+
         private bool CanExecuteBanCommand(object arg)
         {
-            return true;
+            return SelectedUser != null;
         }
 
         private void ExecuteRulledCommand(object obj)

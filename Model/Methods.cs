@@ -75,6 +75,11 @@ namespace Diplom.Client.Model
             db.SaveChanges();
             return true;
         }
+        public static void AddNewUSer(ZashitaDB db, string userName)
+        {
+            db.Users.Add(new User { UserName = userName, Password = "", Status = "U", RulledPass = false});
+            db.SaveChanges();
+        }
 
     }
 }
