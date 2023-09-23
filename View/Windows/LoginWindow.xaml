@@ -9,12 +9,11 @@
         xmlns:customcontrols="clr-namespace:Diplom.Client.Styles"
         xmlns:Shaders="clr-namespace:MathCore.WPF.Shaders;assembly=MathCore.WPF" x:Class="Diplom.View.Windows.LoginWindow"
         mc:Ignorable="d"
-        Title="LoginWindow" 
+        Title="Окно авторизации" 
         Height="600" 
         Width="900"
-        Background="Transparent"
-        AllowsTransparency="True"
-        WindowStyle="None"
+        Background="White"
+        WindowStyle="SingleBorderWindow"
         ResizeMode="NoResize"
         WindowStartupLocation="CenterScreen"
         MouseDown="Window_MouseDown">
@@ -33,11 +32,7 @@
                  Converter="{StaticResource BooleanToVisibility}"/>
     </Window.Visibility>
 
-    <Border CornerRadius="30">
-
-        <Border.Background>
-            <ImageBrush ImageSource="../../Resources/Images/LoginBackground.png"/>
-        </Border.Background>
+    <Border>
 
         <Border CornerRadius="20"
                 BorderThickness="4"
@@ -58,7 +53,7 @@
                     </Grid.ColumnDefinitions>
 
                     <TextBlock Text="Авторизация"
-                               Foreground="AliceBlue"
+                               Foreground="Black"
                                FontSize="16"
                                FontFamily="Montserat"
                                VerticalAlignment="Center"
@@ -66,84 +61,16 @@
                     
                     <Button Content="Справка"
                             Command="{Binding ShowCreaterCommand}"
-                            Foreground="AliceBlue"
+                            Foreground="Black"
                             Background="Transparent"
                             Width="100"
                             HorizontalAlignment="Left"
                             Margin="110,0"/>
-                    
-                    <Button x:Name="btnMinimize"
-                            BorderThickness="0"
-                            Content="-"
-                            Grid.Column="1"
-                            FontSize="16"
-                            FontFamily="Montserat"
-                            Cursor="Hand"
-                            Click="BtnMinimize_Click"
-                            Foreground="White">
-
-                        <Button.Style>
-                            <Style TargetType="{x:Type Button}">
-                                <Setter Property="Background" Value="Gray"/>
-                                <Style.Triggers>
-                                    <Trigger Property="IsMouseOver" Value="True">
-                                        <Setter Property="Background" Value="DarkGray"/>
-                                    </Trigger>
-                                </Style.Triggers>
-                            </Style>
-                        </Button.Style>
-
-                        <Button.Template>
-                            <ControlTemplate TargetType="{x:Type Button}">
-                                <Border Width="18" Height="18"
-                                        CornerRadius="9"
-                                        Background="{TemplateBinding Background}">
-                                    <ContentPresenter VerticalAlignment="Center"
-                                                      HorizontalAlignment="Center"/>
-                                </Border>
-                            </ControlTemplate>
-                        </Button.Template>
-
-                    </Button>
-
-                    <Button x:Name="btnClose"
-                            BorderThickness="0"
-                            Content="X"
-                            Grid.Column="2"
-                            FontSize="13"
-                            FontFamily="Montserat"
-                            Cursor="Hand"
-                            Click="btnClose_Click"
-                            Foreground="White">
-
-                        <Button.Style>
-                            <Style TargetType="{x:Type Button}">
-                                <Setter Property="Background" Value="#DA34AE"/>
-                                <Style.Triggers>
-                                    <Trigger Property="IsMouseOver" Value="True">
-                                        <Setter Property="Background" Value="#C62DAE"/>
-                                    </Trigger>
-                                </Style.Triggers>
-                            </Style>
-                        </Button.Style>
-
-                        <Button.Template>
-                            <ControlTemplate TargetType="{x:Type Button}">
-                                <Border Width="18" Height="18"
-                                        CornerRadius="9"
-                                        Background="{TemplateBinding Background}">
-                                    <ContentPresenter VerticalAlignment="Center"
-                                                      HorizontalAlignment="Center"/>
-                                </Border>
-                            </ControlTemplate>
-                        </Button.Template>
-                    </Button>
 
                 </Grid>
                 <Border  Grid.Row="1" 
                          Grid.Column="0"
                          Margin="576,100,40,110"
-                         Background="AliceBlue"
                          CornerRadius="30"
                          Opacity="0.5"
                          >

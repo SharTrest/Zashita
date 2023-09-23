@@ -12,7 +12,7 @@
     <Border
             BorderThickness="2"
             Width="260"
-            Background="AliceBlue">
+            Background="White">
         <StackPanel  Width="250"
                 Orientation="Vertical"
                 HorizontalAlignment="Center"

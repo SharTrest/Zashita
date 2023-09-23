@@ -8,7 +8,7 @@
              d:DesignHeight="450" d:DesignWidth="800">
     <Border BorderBrush="Black"
             BorderThickness="0,0,0,1">
-    <TextBox x:Name="txtUser"
+        <TextBox x:Name="txtUser"
                              FontSize="13"
                              FontWeight="Medium"
                              FontFamily="Montserat"
@@ -19,12 +19,6 @@
                              VerticalContentAlignment="Center"
                              Margin="0,2,0,0"
                              Padding="20,0,0,0">
-        <TextBox.Background>
-            <ImageBrush ImageSource="../Resources/Images/user-icon.png"
-                                        Stretch="None"
-                                        AlignmentX="Left"
-                                        />
-        </TextBox.Background>
-    </TextBox>
+        </TextBox>
     </Border>
 </UserControl>

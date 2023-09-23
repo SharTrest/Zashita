@@ -23,14 +23,14 @@
                      HorizontalAlignment="Left"
                      Width="100"
                      Background="Transparent"
-                     Foreground="Gray"/>
+                     Foreground="Black"/>
 
             <Button Content="Добавить"
                     Command="{Binding AddNewUserCommand}"
                     Width="100"
                     Height="20"
                     Background="Transparent"
-                    Foreground="Gray"
+                    Foreground="Black"
                     />
 
             <Button Content="Заблокировать"
@@ -38,7 +38,7 @@
                     Width="100"
                     Height="20"
                     Background="Transparent"
-                    Foreground="Gray"
+                    Foreground="Black"
                     Margin="5,0"
                     />
             
@@ -51,7 +51,7 @@
                 VerticalAlignment="Top"
                 Margin="10,50,50,0"
                 Background="Transparent"
-                Foreground="Gray"
+                Foreground="Black"
                 Command="{Binding ChangeRulesCommand}"
                 />
 
@@ -65,13 +65,13 @@
             <ListBox.ItemTemplate>
                 <DataTemplate>
                     <Border BorderThickness="2"
-                            BorderBrush="Gray"
+                            BorderBrush="Black"
                             Width="385"
                             >
                         <WrapPanel Margin="5">
-                            <TextBlock FontSize="18" Text="{Binding Path=UserName}" Margin="5" Foreground="Gray"/>
-                            <TextBlock FontSize="18" Text="{Binding Path=Status}" Margin="5" Foreground="Gray"/>
-                            <TextBlock FontSize="18" Text="{Binding Path=RulledPass}" Margin="5" Foreground="Gray"/>
+                            <TextBlock FontSize="18" Text="{Binding Path=UserName}" Margin="5" Foreground="Black"/>
+                            <TextBlock FontSize="18" Text="{Binding Path=Status}" Margin="5" Foreground="Black"/>
+                            <TextBlock FontSize="18" Text="{Binding Path=RulledPass}" Margin="5" Foreground="Black"/>
                         </WrapPanel>
                     </Border>
                 </DataTemplate>
@@ -84,28 +84,28 @@
                     Height="125"
                     VerticalAlignment="Top">
             <TextBlock Text="Выбранный пользователь"
-                       Foreground="Gray"
+                       Foreground="Black"
                        HorizontalAlignment="Center"
                        FontSize="16"/>
-            <TextBlock Foreground="Gray"
+            <TextBlock Foreground="Black"
                        FontSize="16"
                        Margin="5,0,0,0"
                        Text="{Binding UserName, UpdateSourceTrigger=PropertyChanged}"                
                        />
             <TextBlock Text="Статус" 
-                       Foreground="Gray"
+                       Foreground="Black"
                        FontSize="16"
                        Margin="5,0,0,0"/>
-            <TextBlock Foreground="Gray"
+            <TextBlock Foreground="Black"
                        FontSize="16"
                        Margin="5,0,0,0"
                        Text="{Binding Status, UpdateSourceTrigger=PropertyChanged}"                
                        />
             <TextBlock Text="Ограничения пароля" 
-                       Foreground="Gray"
+                       Foreground="Black"
                        FontSize="16"
                        Margin="5,0,0,0"/>
-            <TextBlock Foreground="Gray"
+            <TextBlock Foreground="Black"
                        FontSize="16"
                        Margin="5,0,0,0"
                        Text="{Binding RulledPass, UpdateSourceTrigger=PropertyChanged}"                
@@ -121,14 +121,14 @@
                     HorizontalAlignment="Center"
                     Margin="5,10,5,5"
                     Background="Transparent"
-                    Foreground="Gray"/>
+                    Foreground="Black"/>
 
         <Button x:Name="Chng"
                     Content="Ограничить пароль"
                     Command="{Binding RuledPassCommand}"
                     Width="200"
                     Background="Transparent"
-                    Foreground="Gray" Height="19.96"
+                    Foreground="Black" Height="19.96"
                     HorizontalAlignment="Center"
                     Margin="5"/>
         </StackPanel>

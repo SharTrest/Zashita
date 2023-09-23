@@ -9,8 +9,9 @@
              mc:Ignorable="d" 
              d:DesignHeight="350" 
              d:DesignWidth="260">
-    <Border BorderBrush ="Gray"
-            Background="AliceBlue"
+    
+    <Border BorderBrush="Gray"
+            Background="White"
             BorderThickness="2"
             Width="260">
         <StackPanel  Width="250"
