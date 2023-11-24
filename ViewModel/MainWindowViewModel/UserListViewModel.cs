@@ -1,4 +1,5 @@
-﻿using Diplom.Client.Model;
+﻿using Diplom.Client.Database.Model;
+using Diplom.Client.Model;
 using Diplom.Utilities;
 using MathCore.WPF;
 using System;

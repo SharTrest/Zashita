@@ -6,6 +6,9 @@ using System.Linq;
 using System.Windows;
 using System.Text;
 using System;
+using Diplom.Client.Database.Context;
+using System.Windows.Documents;
+using Diplom.Client.Database.Model;
 
 namespace Diplom
 {
@@ -13,10 +16,16 @@ namespace Diplom
     {
         private UserData user;
         private UserList db;
+        private ZashitaInformationContext database;
         private void Application_Startup(object sender, StartupEventArgs e)
         {
-            user = new UserData();
             db = new UserList();
+            database = new ZashitaInformationContext();
+            var r = database.Users.ToList();
+            db.Users = database.Users.ToList();
+
+            user = new UserData();
+            
 
 
             var loginView = new LoginWindow(user, db);
@@ -39,15 +48,7 @@ namespace Diplom
         }
         protected override async void OnExit(ExitEventArgs e)
         {
-            File.WriteAllText(db.FileName,"");
-            using (StreamWriter fs = new StreamWriter(db.FileName))
-            {
-                foreach (var user in db.Users)
-                {
-                    var str = user.UserName + "," + user.Password + "," + user.Status + "," + user.RulledPass.ToString() + "\n";
-                    fs.Write(str);
-                }
-            }
+            database.SaveChanges();
             base.OnExit(e);
         }
     }

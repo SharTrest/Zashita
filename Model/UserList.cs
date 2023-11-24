@@ -1,4 +1,5 @@
-﻿using MathCore.WPF.Converters;
+﻿using Diplom.Client.Database.Model;
+using MathCore.WPF.Converters;
 using System;
 using System.Collections.Generic;
 using System.IO;
@@ -27,26 +28,6 @@ namespace Diplom.Client.Model
             Creator = "Снетков Никита. 19. Отсутствие повторяющихся символов.";
             FileName = "Database.txt";
             _users = new List<User>();
-            if (!File.Exists(this.FileName))
-                using (FileStream fs = File.Create(this.FileName))
-                {
-                    byte[] buffer = new UTF8Encoding(true).GetBytes("ADMIN,,A,False\n");
-                    fs.Write(buffer, 0, buffer.Length);
-                }
-            string[] lines = File.ReadAllLines(FileName);
-            foreach (string line in lines)
-            {
-                string[] parts = line.Split(',');
-                Users.Add(new User { UserName = parts[0], Password = parts[1], Status = parts[2], RulledPass = Convert.ToBoolean(parts[3])});
-            }
         }
     }
-    public class User
-    {
-        public string UserName { get; set; }
-        public string Password { get; set; }
-        public string Status { get; set; }
-        public bool RulledPass { get; set; }
-    }
-
-}
+ }
